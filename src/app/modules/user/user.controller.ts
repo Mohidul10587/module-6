@@ -1,6 +1,6 @@
 
 import express, { Application, NextFunction, Request, Response } from 'express';
-import { createUserToDb, getUsersFromDb } from './user.service';
+import { createUserToDb, getUserByIdFromDb, getUsersFromDb } from './user.service';
 import { IUser } from './user.interface';
 
 
@@ -14,8 +14,15 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
     })
 }
 
-export const getUser = async ():Promise<IUser[]> => {
+export const getUser = async (req: Request, res: Response, next: NextFunction): Promise<IUser[]> => {
 
     const user = await getUsersFromDb();
-   return user ;
+    return user;
+}
+
+export const getUserById = async (req: Request, res: Response, next: NextFunction): Promise<IUser | null> => {
+    const id  = req.params.id
+    console.log(id)
+    const user = await getUserByIdFromDb(id);
+    return user;
 }

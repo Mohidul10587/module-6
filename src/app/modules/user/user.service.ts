@@ -12,3 +12,9 @@ export const createUserToDb =async (payLoad:IUser) :Promise<IUser>=>{
    const users = User.find() ;
    return users
   }
+
+  export const getUserByIdFromDb =async (payload:string)=>{
+    console.log(payload)
+    const user = User.findOne({id:payload}) ;
+    return user
+   }
