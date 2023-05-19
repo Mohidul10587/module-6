@@ -1,5 +1,5 @@
 
-import express, { Application, NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { createUserToDb, getUserByIdFromDb, getUsersFromDb } from './user.service';
 import { IUser } from './user.interface';
 
@@ -21,8 +21,7 @@ export const getUser = async (req: Request, res: Response, next: NextFunction): 
 }
 
 export const getUserById = async (req: Request, res: Response, next: NextFunction): Promise<IUser | null> => {
-    const id  = req.params.id
-    console.log(id)
+    const {id}  = req.params
     const user = await getUserByIdFromDb(id);
     return user;
 }
